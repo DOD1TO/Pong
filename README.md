@@ -1,2 +1,2 @@
 # pong
-The famous game PONG.
+The famous game PONG for one player.
