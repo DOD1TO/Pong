@@ -1,2 +1,6 @@
 # pong
-The famous PONG game for one player.
+- O Famoso jogo PONG para um jogador.
+# Requisitos
+- python
+- pygame
+- random
