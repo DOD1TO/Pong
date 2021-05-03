@@ -78,8 +78,9 @@ class Ball:
             self.speed[0] *= -1
 
     def move(self):
-        self.pos[0] += self.speed[0] * self.velocity
-        self.pos[1] += self.speed[1] * self.velocity
+        velocity = self.velocity * (1 + score.points / 10)
+        self.pos[0] += self.speed[0] * velocity
+        self.pos[1] += self.speed[1] * velocity
         self.image_ret.center = self.pos
 
     def update(self, racket_ret):
@@ -97,7 +98,7 @@ class Score:
     def __init__(self):
         pygame.font.init()
         self.font = pygame.font.Font(None, 36)
-        self.points = 10
+        self.points = 0
 
     def count(self):
         self.text = self.font.render('Points: ' + str(self.points), 1, (COLOR_WHITE))
@@ -107,7 +108,7 @@ class Score:
         screen.blit(screen, (0, 0))
 
     def lose(self):
-        if self.points == 0:
+        if self.points < 0:
             pygame.quit()
 
 score = Score()
