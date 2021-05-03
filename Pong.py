@@ -3,9 +3,9 @@ from pygame.locals import *
 import random
 
 # Color
-color_black = ((0, 0, 0))
-color_white = ((255, 255, 255))
-color_red = ((255, 0, 0))
+COLOR_BLACK = ((0, 0, 0))
+COLOR_WHITE = ((255, 255, 255))
+COLOR_RED = ((255, 0, 0))
 
 # Config Game
 width = 800
@@ -20,7 +20,7 @@ FPS = 30
 class Racket:
     def __init__(self, image):
         self.image = pygame.Surface((10, 50))
-        self.image.fill(color_white)
+        self.image.fill(COLOR_WHITE)
         self.image_ret = self.image.get_rect()
         self.image_ret[0] = 20
         self.image_ret[1] = 250
@@ -42,7 +42,7 @@ downpress = False
 class Ball:
     def __init__(self, image):
             self.image = pygame.Surface((10, 10))
-            self.image.fill(color_red)
+            self.image.fill(COLOR_RED)
             self.image_ret = self.image.get_rect()
             self.velocity = 15
             self.set_ball()
@@ -100,11 +100,15 @@ class Score:
         self.points = 10
 
     def count(self):
-        self.text = self.font.render('Points: ' + str(self.points), 1, (color_white))
+        self.text = self.font.render('Points: ' + str(self.points), 1, (COLOR_WHITE))
         self.textpos = self.text.get_rect()
         self.textpos.centerx = screen.get_width() / 2
         screen.blit(self.text, self.textpos)
         screen.blit(screen, (0, 0))
+
+    def lose(self):
+        if self.points == 0:
+            pygame.quit()
 
 score = Score()
 
@@ -138,7 +142,7 @@ while game_over != True:
                 else:
                     vy = 0
 
-    screen.fill(color_black)
+    screen.fill(COLOR_BLACK)
 
     racket.realize_racket()
     racket.move(vx, vy)
@@ -147,6 +151,7 @@ while game_over != True:
     ball.update(racket.image_ret)
 
     score.count()
+    score.lose()
 
     pygame.display.update()
 
